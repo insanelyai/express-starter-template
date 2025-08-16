@@ -15,5 +15,5 @@ app.use(express.json());
 app.use('/api', router);
 
 app.listen(PORT, () => {
-  logger.info(`🚀 Server running at http://localhost:${PORT}`);
+  logger.info(`Server running at http://localhost:${PORT}`);
 });
