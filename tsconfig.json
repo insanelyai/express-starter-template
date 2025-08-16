@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ES2022",
-    "moduleResolution": "bundler",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": "src",
+    "outDir": "dist",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true,
-    "outDir": "dist"
-  },
-  "ts-node": {
-    "experimentalSpecifierResolution": "node"
+    "skipLibCheck": true
   }
 }
