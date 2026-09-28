@@ -1,5 +1,9 @@
 # express-starter-template
 
+[![CI](https://github.com/insanelyai/express-starter-template/actions/workflows/ci.yml/badge.svg)](https://github.com/insanelyai/express-starter-template/actions/workflows/ci.yml)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D22-brightgreen.svg)](package.json)
+
 Express 5 + TypeScript API starter, production-hardened out of the box. Use it as a base for new services: click "Use this template" on GitHub, or `git clone` and repoint the remote.
 
 ## Quick start
@@ -39,6 +43,28 @@ No database, cache, queue or auth library is included — add what a given proje
 - For auth, `jsonwebtoken` + `bcrypt` is a common pairing; hash costs and token expiry are project-specific, so they're left out here.
 - Wire any new dependency's shutdown into `src/server.ts`'s `shutdown()`, alongside `server.close()`.
 
+## Project structure
+
+```
+src/
+  app.ts               Express app: middleware wiring, route mounting
+  server.ts             HTTP server: listen, keep-alive, graceful shutdown
+  config/
+    env.ts               zod-validated environment variables
+    logger.ts             pino logger (redaction, dev pretty-printing)
+    swagger.ts             OpenAPI spec generation
+  lib/
+    http-error.ts          HttpError class for typed error responses
+  middleware/
+    error-handler.ts        central error handler + 404 handler
+    rate-limit.ts            express-rate-limit config
+    validate.ts               zod request validation middleware
+  routes/
+    health.ts                /health/live, /health/ready
+tests/
+  app.test.ts                 middleware, health, and docs coverage
+```
+
 ## Adding a route
 
 1. Create `src/routes/things.ts` exporting a `Router`; use `validate({ body: schema })` from `src/middleware/validate.ts`.
@@ -49,3 +75,7 @@ No database, cache, queue or auth library is included — add what a given proje
 
 - Set `TRUST_PROXY` to the number of proxies in front of the app, or rate limiting will key on the proxy's IP.
 - `CORS_ORIGINS` must be explicit in production (`*` is rejected).
+
+## License
+
+[ISC](LICENSE)
