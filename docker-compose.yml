@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    ports:
+      - '${API_PORT:-3000}:3000'
+    env_file: .env
+    environment:
+      # Override .env so the container never runs in development mode (pino-pretty is a dev dependency).
+      NODE_ENV: production
+    restart: unless-stopped
+    # Add dependencies (a database, Redis, ...) here as needed, with a healthcheck
+    # and a `depends_on: <service>: condition: service_healthy` on api.
